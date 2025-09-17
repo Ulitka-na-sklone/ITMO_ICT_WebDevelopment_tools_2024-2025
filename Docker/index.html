@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>1 - My Docs</title>
+    <title>Docker - My Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = 1;
-        var mkdocs_page_input_path = "1.md";
+        var mkdocs_page_name = "Docker";
+        var mkdocs_page_input_path = "Docker.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -40,16 +40,8 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption"><span class="caption-text">Лабораторная работа 1</span></p>
-              <ul class="current">
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">1</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#_1">Мультипроцессинг</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_2">Многопоточность</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_3">Ассинхронность</a>
-    </li>
-    </ul>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../1/">1</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../2/">2</a>
                   </li>
@@ -68,10 +60,32 @@
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Лабораторная работа 2</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../Celery_worker/">Celery_worker</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../Docker/">Docker</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Docker</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-dockerfile-parser-service">1. Dockerfile для Parser Service</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_1">Назначение</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_2">Характеристики</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_3">Сборка</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-dockerfile-finance-service">2. Dockerfile для Finance Service</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#_4">Назначение</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_5">Характеристики</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_6">Сборка</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Docker-compose/">Docker-compose</a>
                   </li>
@@ -90,8 +104,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Лабораторная работа 1</li>
-      <li class="breadcrumb-item active">1</li>
+          <li class="breadcrumb-item">Лабораторная работа 2</li>
+      <li class="breadcrumb-item active">Docker</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -100,22 +114,66 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="1">Задание 1</h1>
-<h2 id="_1">Мультипроцессинг</h2>
-<p>Execution time: 1.461418628692627 seconds (top 3)</p>
-<p>Создание процессов дороже, чем потоков. И поэтому ускорение от параллелизма не сыграло свою роль.
-Возможно, если бы задача была обширнее, мультипроцессинг показал бы лучший результат.</p>
-<h2 id="_2">Многопоточность</h2>
-<p>Execution time: 1.3050105571746826 seconds (top 1)</p>
-<h2 id="_3">Ассинхронность</h2>
-<p>Execution time: 1.3306987285614014 seconds(top 2)</p>
-<p>Вероятнее всего для этой задачи, ассинхронность не показала лучший результат, так как в данной задаче отсутствуют точки остановки, которые позволили бы экономить время на переключении между задачами.
-Поэтому код выполнялся с той же эффективностью, как и прямая задача (каждый из ассинхронных процессов выполнялся до конца, после чего программа переходила к следующему)</p>
+                <h1 id="docker">Документация Docker конфигурации</h1>
+<h2 id="1-dockerfile-parser-service">1. Dockerfile для Parser Service</h2>
+<pre><code>FROM python:3.9
+
+WORKDIR /parser
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
+
+COPY . .
+
+CMD [&quot;uvicorn&quot;, &quot;main:app&quot;, &quot;--host&quot;, &quot;0.0.0.0&quot;, &quot;--port&quot;, &quot;9000&quot;]
+</code></pre>
+<h3 id="_1">Назначение</h3>
+<p>Создает образ для микросервиса парсера, который обрабатывает HTML контент.</p>
+<h3 id="_2">Характеристики</h3>
+<ul>
+<li><strong>Базовый образ</strong>: Python 3.9</li>
+<li><strong>Рабочая директория</strong>: <code>/parser</code></li>
+<li><strong>Порт</strong>: 9000</li>
+<li><strong>Web сервер</strong>: Uvicorn (ASGI)</li>
+<li><strong>Приложение</strong>: <code>main:app</code></li>
+</ul>
+<h3 id="_3">Сборка</h3>
+<pre><code>docker build -t parser-service .
+</code></pre>
+<hr />
+<h2 id="2-dockerfile-finance-service">2. Dockerfile для Finance Service</h2>
+<pre><code>FROM python:3.11
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+CMD [&quot;uvicorn&quot;, &quot;app:app&quot;, &quot;--host&quot;, &quot;0.0.0.0&quot;, &quot;--port&quot;, &quot;8000&quot;, &quot;--reload&quot;]
+</code></pre>
+<h3 id="_4">Назначение</h3>
+<p>Создает образ для основного финансового приложения.</p>
+<h3 id="_5">Характеристики</h3>
+<ul>
+<li><strong>Базовый образ</strong>: Python 3.11</li>
+<li><strong>Рабочая директория</strong>: <code>/app</code></li>
+<li><strong>Порт</strong>: 8000</li>
+<li><strong>Режим</strong>: development (<code>--reload</code> для автоматической перезагрузки)</li>
+<li><strong>Приложение</strong>: <code>app:app</code></li>
+</ul>
+<h3 id="_6">Сборка</h3>
+<pre><code>docker build -t finance-app .
+</code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../2/" class="btn btn-neutral float-right" title="2">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../Celery_worker/" class="btn btn-neutral float-left" title="Celery_worker"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Docker-compose/" class="btn btn-neutral float-right" title="Docker-compose">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -138,8 +196,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../Celery_worker/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
-      <span><a href="../2/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+      <span><a href="../Docker-compose/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

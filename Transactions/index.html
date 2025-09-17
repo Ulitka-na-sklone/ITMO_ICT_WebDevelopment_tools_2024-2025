@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>1 - My Docs</title>
+    <title>Transactions - My Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = 1;
-        var mkdocs_page_input_path = "1.md";
+        var mkdocs_page_name = "Transactions";
+        var mkdocs_page_input_path = "Transactions.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -40,22 +40,14 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption"><span class="caption-text">Лабораторная работа 1</span></p>
-              <ul class="current">
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">1</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#_1">Мультипроцессинг</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_2">Многопоточность</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#_3">Ассинхронность</a>
-    </li>
-    </ul>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../1/">1</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../2/">2</a>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Лабораторная работа 2</span></p>
-              <ul>
+              <ul class="current">
                   <li class="toctree-l1"><a class="reference internal" href="../User/">User</a>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Account/">Account</a>
@@ -64,7 +56,17 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../Category/">Category</a>
                   </li>
-                  <li class="toctree-l1"><a class="reference internal" href="../Transactions/">Transactions</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Transactions</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#create-transaction">Create Transaction</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#get-transactions">Get Transactions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#update-transaction">Update Transaction</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#delete-transaction">Delete Transaction</a>
+    </li>
+    </ul>
                   </li>
               </ul>
               <p class="caption"><span class="caption-text">Лабораторная работа 2</span></p>
@@ -90,8 +92,8 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Лабораторная работа 1</li>
-      <li class="breadcrumb-item active">1</li>
+          <li class="breadcrumb-item">Лабораторная работа 2</li>
+      <li class="breadcrumb-item active">Transactions</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -100,22 +102,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="1">Задание 1</h1>
-<h2 id="_1">Мультипроцессинг</h2>
-<p>Execution time: 1.461418628692627 seconds (top 3)</p>
-<p>Создание процессов дороже, чем потоков. И поэтому ускорение от параллелизма не сыграло свою роль.
-Возможно, если бы задача была обширнее, мультипроцессинг показал бы лучший результат.</p>
-<h2 id="_2">Многопоточность</h2>
-<p>Execution time: 1.3050105571746826 seconds (top 1)</p>
-<h2 id="_3">Ассинхронность</h2>
-<p>Execution time: 1.3306987285614014 seconds(top 2)</p>
-<p>Вероятнее всего для этой задачи, ассинхронность не показала лучший результат, так как в данной задаче отсутствуют точки остановки, которые позволили бы экономить время на переключении между задачами.
-Поэтому код выполнялся с той же эффективностью, как и прямая задача (каждый из ассинхронных процессов выполнялся до конца, после чего программа переходила к следующему)</p>
+                <h2 id="transaction-endpoints">Transaction Endpoints</h2>
+<h3 id="create-transaction">Create Transaction</h3>
+<p><strong>POST /transactions/</strong><br />
+Создать новую транзакцию. Автоматически обновляет баланс счета.<br />
+<em>Тело: {user_id, category_id, account_id, amount, description?}</em></p>
+<h3 id="get-transactions">Get Transactions</h3>
+<p><strong>GET /transactions/</strong><br />
+Получить список всех транзакций (сортировка по дате).</p>
+<p><strong>GET /transactions/{transaction_id}</strong><br />
+Получить полную информацию о транзакции (с данными пользователя, категории и счета).</p>
+<h3 id="update-transaction">Update Transaction</h3>
+<p><strong>PATCH /transactions/{transaction_id}</strong><br />
+Обновить данные транзакции. Корректирует балансы счетов.<br />
+<em>Тело: {user_id, category_id, account_id, amount, description?}</em></p>
+<h3 id="delete-transaction">Delete Transaction</h3>
+<p><strong>DELETE /transactions/{transaction_id}</strong><br />
+Удалить транзакцию. Автоматически корректирует баланс счета.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../2/" class="btn btn-neutral float-right" title="2">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../Category/" class="btn btn-neutral float-left" title="Category"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Celery_worker/" class="btn btn-neutral float-right" title="Celery_worker">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -138,8 +147,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../Category/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
-      <span><a href="../2/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+      <span><a href="../Celery_worker/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
