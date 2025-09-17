@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Goal - Docs</title>
+    <title>1 - My Docs</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Goal";
-        var mkdocs_page_input_path = "Goal.md";
+        var mkdocs_page_name = 1;
+        var mkdocs_page_input_path = "1.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -30,7 +30,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
     <div class="wy-side-scroll">
       <div class="wy-side-nav-search">
-          <a href=".." class="icon icon-home"> Docs
+          <a href=".." class="icon icon-home"> My Docs
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
       <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
@@ -39,34 +39,20 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../User/">User</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../Account/">Account</a>
-                </li>
-              </ul>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Goal</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">1</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#create-goal">Create Goal</a>
+    <li class="toctree-l2"><a class="reference internal" href="#_1">Мультипроцессинг</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#get-goals">Get Goals</a>
+    <li class="toctree-l2"><a class="reference internal" href="#_2">Многопоточность</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#update-goal">️ Update Goal</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#delete-goal">Delete Goal</a>
+    <li class="toctree-l2"><a class="reference internal" href="#_3">Ассинхронность</a>
     </li>
     </ul>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../Category/">Category</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../Transactions/">Transactions</a>
+                <li class="toctree-l1"><a class="reference internal" href="../2/">2</a>
                 </li>
               </ul>
       </div>
@@ -76,14 +62,14 @@
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
       <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="..">Docs</a>
+          <a href="..">My Docs</a>
         
       </nav>
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Goal</li>
+      <li class="breadcrumb-item active">1</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -92,29 +78,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h2 id="goal-endpoints">Goal Endpoints</h2>
-<h3 id="create-goal">Create Goal</h3>
-<p><strong>POST /goals/</strong><br />
-Создать новую финансовую цель.<br />
-<em>Тело: {name, target_amount, current_amount?, deadline?}</em></p>
-<h3 id="get-goals">Get Goals</h3>
-<p><strong>GET /goals/</strong><br />
-Получить список всех финансовых целей.</p>
-<p><strong>GET /goals/{goal_id}</strong><br />
-Получить информацию о конкретной финансовой цели с данными пользователя.</p>
-<h3 id="update-goal">️ Update Goal</h3>
-<p><strong>PATCH /goals/{goal_id}</strong><br />
-Обновить данные финансовой цели.<br />
-<em>Тело: {name?, target_amount?, current_amount?, deadline?}</em></p>
-<h3 id="delete-goal">Delete Goal</h3>
-<p><strong>DELETE /goals/{goal_id}</strong><br />
-Удалить финансовую цель.</p>
+                <h1 id="1">Задание 1</h1>
+<h2 id="_1">Мультипроцессинг</h2>
+<p>Execution time: 1.461418628692627 seconds (top 3)</p>
+<p>Создание процессов дороже, чем потоков. И поэтому ускорение от параллелизма не сыграло свою роль.
+Возможно, если бы задача была обширнее, мультипроцессинг показал бы лучший результат.</p>
+<h2 id="_2">Многопоточность</h2>
+<p>Execution time: 1.3050105571746826 seconds (top 1)</p>
+<h2 id="_3">Ассинхронность</h2>
+<p>Execution time: 1.3306987285614014 seconds(top 2)</p>
+<p>Вероятнее всего для этой задачи, ассинхронность не показала лучший результат, так как в данной задаче отсутствуют точки остановки, которые позволили бы экономить время на переключении между задачами.
+Поэтому код выполнялся с той же эффективностью, как и прямая задача (каждый из ассинхронных процессов выполнялся до конца, после чего программа переходила к следующему)</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../Account/" class="btn btn-neutral float-left" title="Account"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../Category/" class="btn btn-neutral float-right" title="Category">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../2/" class="btn btn-neutral float-right" title="2">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -137,10 +116,8 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../Account/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
-    
-      <span><a href="../Category/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../2/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
